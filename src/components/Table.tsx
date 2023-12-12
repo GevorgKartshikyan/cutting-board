@@ -1,20 +1,36 @@
-import React, { type FC } from 'react'
+import React, { type ChangeEvent, type FC, useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { type ListItem } from '../helpers/types'
 import Button from './Button'
 import InputForEdit from './InputForEdit'
 import { openForChange, deleteBoard } from '../store/actions/board'
 
-const List: FC = () => {
+const Table: FC = () => {
   const dispatch = useDispatch()
   const boardList = useSelector((state: { board: { list: ListItem[] } }) => state.board.list)
+  const [form, setForm] = useState({
+    width: '',
+    height: '',
+    quantity: '',
+    id: ''
+  })
   const handleDeleteBoard = (id: string): void => {
     dispatch(deleteBoard({ id }))
   }
-  const handleOnChange = (id: string): void => {
+  const handleOnChange = useCallback((id: string, width: string, height: string, quantity: string): void => {
     dispatch(openForChange({ id }))
-  }
-  console.log(boardList)
+    setForm({
+      width,
+      height,
+      quantity,
+      id
+    })
+  }, [])
+
+  const handleChange = useCallback((key: string) => (event: ChangeEvent<HTMLInputElement>): void => {
+    setForm({ ...form, [key]: event.target.value })
+  }, [form])
+  console.log(form)
   return (
         <>
             {boardList.length > 0 && (<div>
@@ -35,29 +51,36 @@ const List: FC = () => {
                             <td className="data-cell">{index + 1}</td>
                             <td className="data-cell">
                                 <InputForEdit
+                                    onChange={handleChange}
+                                    field='width'
                                     disabled={!item.changed}
                                     value={item.width}
                                 />
                             </td>
                             <td className="data-cell">
                                 <InputForEdit
+                                    onChange={handleChange}
+                                    field='height'
                                     disabled={!item.changed}
                                     value={item.height}
                                 />
                             </td>
                             <td className="data-cell">
                                 <InputForEdit
+                                    onChange={handleChange}
+                                    field='quantity'
                                     disabled={!item.changed}
                                     value={item.quantity}
                                 />
                             </td>
                             <td className="data-cell">
-                               <div style={{
-                                 backgroundColor: item.color,
-                                 width: 50,
-                                 height: 50
-                               }}
-                               />
+                                <div style={{
+                                  backgroundColor: item.color,
+                                  width: 50,
+                                  height: 50,
+                                  opacity: 0.6
+                                }}
+                                />
                             </td>
                             <td className="data-cell">
                                 <Button
@@ -73,7 +96,9 @@ const List: FC = () => {
                                     className='form__button'
                                     type='button'
                                     onAddData={(): void => {
-                                      handleOnChange(item.id)
+                                      if (!item.changed) {
+                                        handleOnChange(item.id, item.width, item.height, item.quantity)
+                                      }
                                     }}
                                 />
                             </td>
@@ -86,4 +111,4 @@ const List: FC = () => {
   )
 }
 
-export default List
+export default Table
