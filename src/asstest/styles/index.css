@@ -117,4 +117,63 @@ input[type=number] {
   align-content: flex-start;
 }
 
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-button {
+  background-color: #ffffff;
+  border-radius: 4px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  cursor: pointer;
+  color: #333;
+  margin: 10px;
+  transition: all 0.4s;
+}
+.modal-button:hover {
+  background-color: brown;
+}
+.modal-title {
+  color: black;
+  margin: 0;
+  line-height: 1;
+  font-size: 22px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.modal-top-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-img {
+  width: 30%;
+  height: 30%;
+  object-fit: cover;
+  margin-top: 20px;
+}
+.modal-close {
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all 0.4s;
+  font-size: 20px;
+}
+.modal-close:hover {
+  transform: scale(1.5);
+}
+.modal-input-box {
+  width: 100%;
+}
+.modal-input-block {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
 /*# sourceMappingURL=index.css.map */

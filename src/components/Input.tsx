@@ -5,7 +5,7 @@ import { type InputProps } from '../helpers/types'
 const Input: FC<InputProps> = ({ labelTitle, handleChange, value, required }) => {
   return (
         <div>
-            <label className="form__label" htmlFor="width">{labelTitle}:</label>
+            <label className="form__label">{labelTitle}:</label>
             <input
                 required={required}
                 onChange={handleChange(labelTitle.toLocaleLowerCase())}

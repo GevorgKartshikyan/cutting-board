@@ -35,6 +35,12 @@ export interface ListItem {
   quantity: string
   changed: boolean
   color: string
+  extraFields?: {
+    borderTopLeftRadius: string
+    borderTopRightRadius: string
+    borderBottomLeftRadius: string
+    borderBottomRightRadius: string
+  }
 }
 
 export interface DeleteBoard {
@@ -55,4 +61,14 @@ export interface SmallBoardProps {
   backgroundImage: string
   isSelected: boolean
   selectColor: (color: string) => void
+}
+export interface ChangeFields {
+  width: string
+  height: string
+  quantity: string
+  id: string
+}
+export interface BoardFieldsModalProps {
+  id: string
+  onCloseModal: () => void
 }

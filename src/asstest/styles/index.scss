@@ -4,11 +4,12 @@ $color-white: #ffffff;
 $color-border: #ddd;
 $color-tableBg: #f2f2f2;
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -88,37 +89,44 @@ input[type=number] {
   }
 }
 
-.board-container{
+.board-container {
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
-.select-board{
+
+.select-board {
   margin-left: 50px;
   margin-top: 20px;
-  h1{
+
+  h1 {
     margin-bottom: 20px;
   }
-  .select-board-block{
+
+  .select-board-block {
     display: flex;
     width: 30%;
     justify-content: space-between;
-    .small-board{
+
+    .small-board {
       border: 1px solid black;
       width: 80px;
       height: 80px;
       cursor: pointer;
       transition: all 0.4s;
-      &:hover{
+
+      &:hover {
         transform: scale(1.5);
       }
-      &.selected{
+
+      &.selected {
         border: 5px solid rgba(4, 74, 180, 0.5);
       }
     }
   }
 }
-.big-board{
+
+.big-board {
   max-width: 100vw;
   border: 1px solid black;
   background-size: cover;
@@ -127,4 +135,70 @@ input[type=number] {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &-button {
+    background-color: $color-white;
+    border-radius: 4px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: #333;
+    margin: 10px;
+    transition: all 0.4s;
+    &:hover{
+      background-color: brown;
+    }
+  }
+
+  &-title {
+    color: black;
+    margin: 0;
+    line-height: 1;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  &-top-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &-img {
+    width: 30%;
+    height: 30%;
+    object-fit: cover;
+    margin-top: 20px;
+  }
+
+  &-close {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: all 0.4s;
+    font-size: 20px;
+
+    &:hover {
+      transform: scale(1.5);
+    }
+  }
+
+  &-input-box {
+    width: 100%;
+  }
+
+  &-input-block {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+  }
 }

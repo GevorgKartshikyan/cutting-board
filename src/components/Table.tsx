@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { type ListItem } from '../helpers/types'
 import Button from './Button'
 import InputForEdit from './InputForEdit'
-import { openForChange, deleteBoard } from '../store/actions/board'
-
+import { openForChange, deleteBoard, saveChanges } from '../store/actions/board'
+import Modal from 'react-modal'
+import BoardFieldsModal from './BoardFieldsModal'
 const Table: FC = () => {
   const dispatch = useDispatch()
+  const [boardId, setBoardId] = useState('')
+  const [showModal, setShowModal] = useState(false)
   const boardList = useSelector((state: { board: { list: ListItem[] } }) => state.board.list)
   const [form, setForm] = useState({
     width: '',
@@ -25,12 +28,16 @@ const Table: FC = () => {
       quantity,
       id
     })
-  }, [])
+  }, [form])
 
   const handleChange = useCallback((key: string) => (event: ChangeEvent<HTMLInputElement>): void => {
     setForm({ ...form, [key]: event.target.value })
   }, [form])
-  console.log(form)
+
+  const handleSaveChanges = useCallback((id: string) => {
+    dispatch(openForChange({ id }))
+    dispatch(saveChanges({ ...form }))
+  }, [form])
   return (
         <>
             {boardList.length > 0 && (<div>
@@ -98,7 +105,18 @@ const Table: FC = () => {
                                     onAddData={(): void => {
                                       if (!item.changed) {
                                         handleOnChange(item.id, item.width, item.height, item.quantity)
+                                      } else {
+                                        handleSaveChanges(item.id)
                                       }
+                                    }}
+                                />
+                                <Button
+                                    title='Edit Detail'
+                                    className='form__button'
+                                    type='button'
+                                    onAddData={(): void => {
+                                      setShowModal(true)
+                                      setBoardId(item.id)
                                     }}
                                 />
                             </td>
@@ -107,6 +125,16 @@ const Table: FC = () => {
                     </tbody>
                 </table>
             </div>)}
+            <Modal
+                isOpen={showModal}
+                shouldCloseOnOverlayClick={true}
+                onRequestClose={() => { setShowModal(false) }}
+            >
+                <BoardFieldsModal
+                    onCloseModal={() => { setShowModal(false) }}
+                    id={boardId}
+                />
+            </Modal>
         </>
   )
 }
