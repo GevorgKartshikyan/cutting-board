@@ -1,10 +1,13 @@
 import React, { type ChangeEvent, type FC, useCallback, useState } from 'react'
 import radius from '../asstest/images/radius.jpg'
 import Button from './Button'
-import { type BoardFieldsModalProps } from '../helpers/types'
+import { type BoardFieldsModalProps, type extraFields } from '../helpers/types'
+import { useDispatch } from 'react-redux'
+import { changeExtraFields } from '../store/actions/board'
 
 const BoardFieldsModal: FC<BoardFieldsModalProps> = ({ id, onCloseModal }) => {
-  const [radiusForm, setRadiusForm] = useState({
+  const dispatch = useDispatch()
+  const [radiusForm, setRadiusForm] = useState<extraFields>({
     id,
     borderTopLeftRadius: '0',
     borderTopRightRadius: '0',
@@ -14,7 +17,12 @@ const BoardFieldsModal: FC<BoardFieldsModalProps> = ({ id, onCloseModal }) => {
   const handleChange = useCallback((key: string) => (event: ChangeEvent<HTMLInputElement>): void => {
     setRadiusForm({ ...radiusForm, [key]: event.target.value })
   }, [radiusForm])
-
+  const handleSaveExtraFields = useCallback(() => {
+    dispatch(changeExtraFields({
+      ...radiusForm
+    }))
+    onCloseModal()
+  }, [radiusForm])
   return (
         <div className='modal'>
             <button type='button' onClick={onCloseModal} className='modal-close'>X</button>
@@ -72,7 +80,7 @@ const BoardFieldsModal: FC<BoardFieldsModalProps> = ({ id, onCloseModal }) => {
             }}/>
             <div>
                <Button title='Close' className='modal-button' type='button' onAddData={onCloseModal}/>
-               <Button title='Save' className='modal-button' type='button' onAddData={() => {}}/>
+               <Button title='Save' className='modal-button' type='button' onAddData={handleSaveExtraFields}/>
             </div>
         </div>
   )

@@ -1,6 +1,6 @@
 import { createReducer, type PayloadAction } from '@reduxjs/toolkit'
-import { boardListsAdd, openForChange, deleteBoard, saveChanges } from '../actions/board'
-import { type ChangeFields, type DeleteBoard, type ListItem } from '../../helpers/types'
+import { boardListsAdd, openForChange, deleteBoard, saveChanges, changeExtraFields } from '../actions/board'
+import { type ChangeFields, type DeleteBoard, type extraFields, type ListItem } from '../../helpers/types'
 
 interface BoardState {
   list: ListItem[]
@@ -35,6 +35,27 @@ export default createReducer(initialState, (builder) => {
           e.width = width
           e.height = height
           e.quantity = quantity
+        }
+        return e
+      })
+    })
+    .addCase(changeExtraFields, (state, action: PayloadAction<extraFields>) => {
+      const {
+        id,
+        borderTopLeftRadius,
+        borderTopRightRadius,
+        borderBottomRightRadius,
+        borderBottomLeftRadius
+      } = action.payload
+      console.log(action.payload)
+      state.list = state.list.map((e) => {
+        if (e.id === id) {
+          e.extraFields = {
+            borderTopLeftRadius: (parseFloat(borderTopLeftRadius) / 2.4) + 'px',
+            borderTopRightRadius: (parseFloat(borderTopRightRadius) / 2.4) + 'px',
+            borderBottomRightRadius: (parseFloat(borderBottomRightRadius) / 2.4) + 'px',
+            borderBottomLeftRadius: (parseFloat(borderBottomLeftRadius) / 2.4) + 'px'
+          }
         }
         return e
       })

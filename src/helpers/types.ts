@@ -42,7 +42,13 @@ export interface ListItem {
     borderBottomRightRadius: string
   }
 }
-
+export interface extraFields {
+  id: string
+  borderTopLeftRadius: string
+  borderTopRightRadius: string
+  borderBottomLeftRadius: string
+  borderBottomRightRadius: string
+}
 export interface DeleteBoard {
   id: string
 }
