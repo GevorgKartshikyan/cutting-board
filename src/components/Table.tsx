@@ -12,15 +12,15 @@ const Table: FC = () => {
   const [showModal, setShowModal] = useState(false)
   const boardList = useSelector((state: { board: { list: ListItem[] } }) => state.board.list)
   const [form, setForm] = useState({
-    width: '',
-    height: '',
-    quantity: '',
+    width: 0,
+    height: 0,
+    quantity: 0,
     id: ''
   })
   const handleDeleteBoard = (id: string): void => {
     dispatch(deleteBoard({ id }))
   }
-  const handleOnChange = useCallback((id: string, width: string, height: string, quantity: string): void => {
+  const handleOnChange = useCallback((id: string, width: number, height: number, quantity: number): void => {
     dispatch(openForChange({ id }))
     setForm({
       width,
@@ -36,7 +36,12 @@ const Table: FC = () => {
 
   const handleSaveChanges = useCallback((id: string) => {
     dispatch(openForChange({ id }))
-    dispatch(saveChanges({ ...form }))
+    dispatch(saveChanges({
+      width: form.width.toString(),
+      height: form.height.toString(),
+      quantity: form.quantity.toString(),
+      id: form.id
+    }))
   }, [form])
   return (
         <>

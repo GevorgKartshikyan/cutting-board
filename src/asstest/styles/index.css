@@ -74,12 +74,6 @@ input[type=number] {
   text-align: left;
 }
 
-.board-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
 .select-board {
   margin-left: 50px;
   margin-top: 20px;
@@ -174,6 +168,15 @@ input[type=number] {
   width: 50%;
   display: flex;
   justify-content: space-between;
+}
+
+.error-message {
+  color: #d9534f;
+  background-color: #f2dede;
+  border: 1px solid #d9534f;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
 /*# sourceMappingURL=index.css.map */

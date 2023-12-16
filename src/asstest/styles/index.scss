@@ -89,11 +89,12 @@ input[type=number] {
   }
 }
 
-.board-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
+//.board-container {
+//  display: flex;
+//  justify-content: center;
+//  margin-top: 40px;
+//  position: relative;
+//}
 
 .select-board {
   margin-left: 50px;
@@ -202,3 +203,13 @@ input[type=number] {
     justify-content: space-between;
   }
 }
+.error-message {
+  color: #d9534f;
+  background-color: #f2dede;
+  border: 1px solid #d9534f;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+

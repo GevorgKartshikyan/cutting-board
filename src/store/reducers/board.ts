@@ -32,9 +32,9 @@ export default createReducer(initialState, (builder) => {
       const { id, width, height, quantity } = action.payload
       state.list = state.list.map((e) => {
         if (e.id === id) {
-          e.width = width
-          e.height = height
-          e.quantity = quantity
+          e.width = +width
+          e.height = +height
+          e.quantity = +quantity
         }
         return e
       })

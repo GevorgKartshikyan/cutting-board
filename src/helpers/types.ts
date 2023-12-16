@@ -29,18 +29,13 @@ export interface ButtonProps {
   onAddData: (event: FormEvent) => void
 }
 export interface ListItem {
+  width: number
+  height: number
+  quantity: number
   id: string
-  height: string
-  width: string
-  quantity: string
-  changed: boolean
   color: string
-  extraFields?: {
-    borderTopLeftRadius: string
-    borderTopRightRadius: string
-    borderBottomLeftRadius: string
-    borderBottomRightRadius: string
-  }
+  changed: boolean
+  extraFields?: Record<string, string>
 }
 export interface extraFields {
   id: string
@@ -54,7 +49,7 @@ export interface DeleteBoard {
 }
 
 export interface InputForEditProps {
-  value: string
+  value: number
   disabled: boolean
   field: string
   onChange: (key: string) => (ev: ChangeEvent<HTMLInputElement>) => void
@@ -77,4 +72,27 @@ export interface ChangeFields {
 export interface BoardFieldsModalProps {
   id: string
   onCloseModal: () => void
+}
+export interface BoxDimensionsProps {
+  top?: string
+  right?: string
+  dimensions: number
+  bottom?: string
+  left?: string
+  isHeight: boolean
+  fontSize?: string
+}
+export interface Box {
+  x: number
+  y: number
+  width: number
+  height: number
+  color: string
+}
+
+export interface SmallBox {
+  width: number
+  height: number
+  quantity: number
+  color: string
 }

@@ -22,6 +22,7 @@ const Form: FC = () => {
     height: '',
     quantity: ''
   })
+  const [error, setError] = useState('')
   const handleAddItem = useCallback(
     (event: FormEvent): void => {
       event.preventDefault()
@@ -30,21 +31,28 @@ const Form: FC = () => {
         randomColor = generateRandomColor()
       }
       usedColors.push(randomColor)
-      dispatch(
-        boardListsAdd({
-          ...formData,
-          id: _.uniqueId(),
-          changed: false,
-          color: randomColor
-        })
-      )
-      setFormData({ width: '', height: '', quantity: '' })
+      if ((formData.width !== '') && (formData.height !== '') && (formData.quantity !== '')) {
+        dispatch(
+          boardListsAdd({
+            width: +formData.width,
+            quantity: +formData.quantity,
+            height: +formData.height,
+            id: _.uniqueId(),
+            changed: false,
+            color: randomColor
+          })
+        )
+        setFormData({ width: '', height: '', quantity: '' })
+      } else {
+        setError('Please fill out all fields :)')
+      }
     },
     [formData, dispatch, usedColors]
   )
 
   const handleChange = useCallback((key: string) => (event: ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [key]: event.target.value })
+    setError('')
   }, [formData])
   return (
         <div className='form-container'>
@@ -67,6 +75,7 @@ const Form: FC = () => {
                     handleChange={handleChange}
                     labelTitle={LabelTitle.Quantity}
                 />
+                {(error !== '') && <p className='error-message'>{error}</p>}
                 <Button
                     onAddData={handleAddItem}
                     title='Add'
