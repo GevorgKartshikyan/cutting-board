@@ -19,9 +19,7 @@ const Locales: FC = () => {
 
   const changeLanguage = (language: string): void => {
     window.localStorage.setItem('language', language)
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises,@typescript-eslint/ban-ts-comment
     i18n.changeLanguage(window.localStorage.getItem('language'))
   }
 
