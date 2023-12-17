@@ -9,7 +9,7 @@ const Box: FC<BoxProps> = ({ width, height, color, extraFields, left, top }: Box
                   left,
                   top,
                   width: `${(+width / 2.4)}px`,
-                  height: `${(+height / 2.4)}px`,
+                  height: `${(+height / 2.4) - 1}px`,
                   backgroundColor: color,
                   border: '1px solid #FFFFFFA5',
                   opacity: 0.6,
@@ -17,8 +17,8 @@ const Box: FC<BoxProps> = ({ width, height, color, extraFields, left, top }: Box
                   ...extraFields
                 }}
             >
-              <BoxDimensions isHeight={false} top='0px' right='5px' dimensions={width}/>
-              <BoxDimensions isHeight={true} bottom='10px' left='0px' dimensions={height}/>
+              <BoxDimensions fontSize='14px' isHeight={false} top='0px' right='5px' dimensions={width}/>
+              <BoxDimensions fontSize='14px' isHeight={true} bottom='10px' left='0px' dimensions={height}/>
             </div>
     </>
 }

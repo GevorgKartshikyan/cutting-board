@@ -15,10 +15,12 @@ export interface FormData {
 export type ValidLabelTitles = 'Width' | 'Height' | 'Quantity'
 
 export interface InputProps {
-  labelTitle: ValidLabelTitles
+  labelTitle: string
   handleChange: (key: string) => (ev: ChangeEvent<HTMLInputElement>) => void
   value: string
   required: boolean
+  field: string
+  placeholder: string
 }
 export type ButtonTypes = 'submit' | 'button' | 'reset'
 

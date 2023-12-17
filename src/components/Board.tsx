@@ -18,7 +18,8 @@ const Board: FC = () => {
               width: width / 2.4,
               height: height / 2.4,
               border: '1px solid black',
-              background: boardColor
+              background: boardColor,
+              marginBottom: 50
             }}>
                 {boards.map((box) => (
                     <Box

@@ -11,15 +11,16 @@ function packBoxes (bigBoxWidth, bigBoxHeight, smallBoxes) {
     for (const placedBox of placedBoxes) {
       if (
         x < placedBox.x + placedBox.width &&
-          x + width > placedBox.x &&
-          y < placedBox.y + placedBox.height &&
-          y + height > placedBox.y
+                x + width > placedBox.x &&
+                y < placedBox.y + placedBox.height &&
+                y + height > placedBox.y
       ) {
         return false
       }
     }
     return true
   }
+
   for (const smallBox of sortedBoxes) {
     let placed = false
 
@@ -49,7 +50,7 @@ function packBoxes (bigBoxWidth, bigBoxHeight, smallBoxes) {
       if (placed) break
     }
   }
-  console.log(placedBoxes)
   return placedBoxes
 }
+
 export default packBoxes

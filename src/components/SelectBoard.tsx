@@ -7,9 +7,11 @@ import SmallBoard from './SmallBoard'
 import { useDispatch, useSelector } from 'react-redux'
 import { type BigBoardColor } from '../helpers/types'
 import { selectBigBoardColor } from '../store/actions/app'
+import { useTranslation } from 'react-i18next'
 
 const SelectBoard: FC = () => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const colors = [boardBgAlpine, boardBgAcacia, boardBgOak, boardBgAruba]
   const boardColor = useSelector((state: { app: BigBoardColor }) => state.app.color)
   const handleSelectColor = (color: string): void => {
@@ -17,7 +19,7 @@ const SelectBoard: FC = () => {
   }
   return (
         <div className='select-board'>
-            <h1>Select Board Color</h1>
+            <h1>{t('select_title')}</h1>
             <div className='select-board-block'>
                 {colors.map((e) => (
                     <SmallBoard

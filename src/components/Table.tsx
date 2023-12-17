@@ -6,7 +6,10 @@ import InputForEdit from './InputForEdit'
 import { openForChange, deleteBoard, saveChanges } from '../store/actions/board'
 import Modal from 'react-modal'
 import BoardFieldsModal from './BoardFieldsModal'
+import { useTranslation } from 'react-i18next'
 const Table: FC = () => {
+  const { t } = useTranslation()
+
   const dispatch = useDispatch()
   const [boardId, setBoardId] = useState('')
   const [showModal, setShowModal] = useState(false)
@@ -50,11 +53,11 @@ const Table: FC = () => {
                     <thead>
                     <tr>
                         <th className="header-cell">№</th>
-                        <th className="header-cell">Width</th>
-                        <th className="header-cell">Height</th>
-                        <th className="header-cell">Quantity</th>
-                        <th className="header-cell">Color</th>
-                        <th className="header-cell">Actions</th>
+                        <th className="header-cell">{t('width')}</th>
+                        <th className="header-cell">{t('height')}</th>
+                        <th className="header-cell">{t('quantity')}</th>
+                        <th className="header-cell">{t('color')}</th>
+                        <th className="header-cell">{t('actions')}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -96,7 +99,7 @@ const Table: FC = () => {
                             </td>
                             <td className="data-cell">
                                 <Button
-                                    title='Delete'
+                                    title={t('delete')}
                                     className='form__button'
                                     type='button'
                                     onAddData={(): void => {
@@ -104,7 +107,7 @@ const Table: FC = () => {
                                     }}
                                 />
                                 <Button
-                                    title={item.changed ? 'Save' : 'Edite'}
+                                    title={item.changed ? t('save') : t('edit')}
                                     className='form__button'
                                     type='button'
                                     onAddData={(): void => {
@@ -116,7 +119,7 @@ const Table: FC = () => {
                                     }}
                                 />
                                 <Button
-                                    title='Edit Detail'
+                                    title={t('edit_detail')}
                                     className='form__button'
                                     type='button'
                                     onAddData={(): void => {

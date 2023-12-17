@@ -1,10 +1,11 @@
 import React, { type ChangeEvent, type FC, type FormEvent, useCallback, useState } from 'react'
 import Input from './Input'
-import { LabelTitle, type FormData } from '../helpers/types'
+import { type FormData } from '../helpers/types'
 import Button from './Button'
 import _ from 'lodash'
 import { useDispatch } from 'react-redux'
 import { boardListsAdd } from '../store/actions/board'
+import { useTranslation } from 'react-i18next'
 
 const generateRandomColor = (): string => {
   const letters = '0123456789ABCDEF'
@@ -15,6 +16,8 @@ const generateRandomColor = (): string => {
   return color
 }
 const Form: FC = () => {
+  const { t } = useTranslation()
+
   const dispatch = useDispatch()
   const usedColors: string[] = []
   const [formData, setFormData] = useState<FormData>({
@@ -44,7 +47,7 @@ const Form: FC = () => {
         )
         setFormData({ width: '', height: '', quantity: '' })
       } else {
-        setError('Please fill out all fields :)')
+        setError(t('error'))
       }
     },
     [formData, dispatch, usedColors]
@@ -58,27 +61,33 @@ const Form: FC = () => {
         <div className='form-container'>
             <form className='form'>
                 <Input
+                    placeholder={t('placeholder_width')}
+                    field='width'
                     required={true}
                     value={formData.width}
                     handleChange={handleChange}
-                    labelTitle={LabelTitle.Width}
+                    labelTitle={t('width')}
                 />
                 <Input
+                    placeholder={t('placeholder_height')}
+                    field='height'
                     required={true}
                     value={formData.height}
                     handleChange={handleChange}
-                    labelTitle={LabelTitle.Height}
+                    labelTitle={t('height')}
                 />
                 <Input
+                    placeholder={t('placeholder_quantity')}
+                    field='quantity'
                     required={true}
                     value={formData.quantity}
                     handleChange={handleChange}
-                    labelTitle={LabelTitle.Quantity}
+                    labelTitle={t('quantity')}
                 />
                 {(error !== '') && <p className='error-message'>{error}</p>}
                 <Button
                     onAddData={handleAddItem}
-                    title='Add'
+                    title={t('add')}
                     className='form__button'
                     type='submit'
                 />

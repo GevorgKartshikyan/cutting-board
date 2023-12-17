@@ -4,9 +4,11 @@ import Button from './Button'
 import { type BoardFieldsModalProps, type extraFields } from '../helpers/types'
 import { useDispatch } from 'react-redux'
 import { changeExtraFields } from '../store/actions/board'
+import { useTranslation } from 'react-i18next'
 
 const BoardFieldsModal: FC<BoardFieldsModalProps> = ({ id, onCloseModal }) => {
   const dispatch = useDispatch()
+  const { t } = useTranslation()
   const [radiusForm, setRadiusForm] = useState<extraFields>({
     id,
     borderTopLeftRadius: '0',
@@ -27,13 +29,13 @@ const BoardFieldsModal: FC<BoardFieldsModalProps> = ({ id, onCloseModal }) => {
         <div className='modal'>
             <button type='button' onClick={onCloseModal} className='modal-close'>X</button>
             <div className='modal-top-block'>
-                <h2 className='modal-title'>SETTING PARAMETERS FOR CORNERS OF A PART</h2>
+                <h2 className='modal-title'>{t('modal_title')}</h2>
                 <img src={radius} alt='Internal cut' className='modal-img'/>
             </div>
             <div className='modal-input-block'>
                <div>
                    <div className='modal-input-box'>
-                       <label className="form__label" htmlFor="width">Top left corner</label>
+                       <label className="form__label" htmlFor="width">{t('top_left')}</label>
                        <input
                            value={radiusForm.borderTopLeftRadius}
                            type="number"
@@ -42,7 +44,7 @@ const BoardFieldsModal: FC<BoardFieldsModalProps> = ({ id, onCloseModal }) => {
                        />
                    </div>
                    <div className='modal-input-box'>
-                       <label className="form__label" htmlFor="width">Top right corner</label>
+                       <label className="form__label" htmlFor="width">{t('top_right')}</label>
                        <input
                            value={radiusForm.borderTopRightRadius}
                            type="number"
@@ -53,7 +55,7 @@ const BoardFieldsModal: FC<BoardFieldsModalProps> = ({ id, onCloseModal }) => {
                </div>
                 <div>
                     <div className='modal-input-box'>
-                        <label className="form__label" htmlFor="width">Bottom left corner</label>
+                        <label className="form__label" htmlFor="width">{t('bottom_left')}</label>
                         <input
                             value={radiusForm.borderBottomLeftRadius}
                             type="number"
@@ -62,7 +64,7 @@ const BoardFieldsModal: FC<BoardFieldsModalProps> = ({ id, onCloseModal }) => {
                         />
                     </div>
                     <div className='modal-input-box'>
-                        <label className="form__label" htmlFor="width">Bottom right corner</label>
+                        <label className="form__label" htmlFor="width">{t('bottom_right')}</label>
                         <input
                             value={radiusForm.borderBottomRightRadius}
                             type="number"
@@ -79,8 +81,8 @@ const BoardFieldsModal: FC<BoardFieldsModalProps> = ({ id, onCloseModal }) => {
               ...Object.fromEntries(Object.entries(radiusForm).map(([key, value]) => [key, +value]))
             }}/>
             <div>
-               <Button title='Close' className='modal-button' type='button' onAddData={onCloseModal}/>
-               <Button title='Save' className='modal-button' type='button' onAddData={handleSaveExtraFields}/>
+               <Button title={t('close')} className='modal-button' type='button' onAddData={onCloseModal}/>
+               <Button title={t('save')} className='modal-button' type='button' onAddData={handleSaveExtraFields}/>
             </div>
         </div>
   )
