@@ -37,6 +37,15 @@ export interface ListItem {
   changed: boolean
   extraFields?: Record<string, string>
 }
+export interface BoxProps {
+  width: number
+  height: number
+  id: string
+  color: string
+  extraFields?: Record<string, string>
+  left: number
+  top: number
+}
 export interface extraFields {
   id: string
   borderTopLeftRadius: string

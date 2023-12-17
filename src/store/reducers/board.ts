@@ -47,7 +47,6 @@ export default createReducer(initialState, (builder) => {
         borderBottomRightRadius,
         borderBottomLeftRadius
       } = action.payload
-      console.log(action.payload)
       state.list = state.list.map((e) => {
         if (e.id === id) {
           e.extraFields = {

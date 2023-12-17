@@ -2,15 +2,15 @@ import React, { type FC } from 'react'
 import { height, width } from '../helpers/constants'
 import { useSelector } from 'react-redux'
 import { type BigBoardColor, type ListItem } from '../helpers/types'
-// import packBoxes from '../helpers/packBoxes'
+import packBoxes from '../helpers/packBoxes'
+import duplicateBoxes from '../helpers/duplicateBoxes'
 import Box from './Box'
 import BoxDimensions from './BoxDimensions'
 
 const Board: FC = () => {
   const boardColor = useSelector((state: { app: BigBoardColor }) => state.app.color)
   const boardList = useSelector((state: { board: { list: ListItem[] } }) => state.board.list)
-  // const placedBoxes = packBoxes(width / 2.4, height / 2.4, boardList)
-
+  const boards = packBoxes(width, height, duplicateBoxes(boardList))
   return (
         <div className='board-container'>
             <div style={{
@@ -20,18 +20,20 @@ const Board: FC = () => {
               border: '1px solid black',
               background: boardColor
             }}>
-                <BoxDimensions fontSize='24px' isHeight={false} top='-50px' right='50%' dimensions={width}/>
-                <BoxDimensions fontSize='24px' isHeight={true} bottom='50%' left='-50px' dimensions={height}/>
-                {boardList.map((e) => (
+                {boards.map((box) => (
                     <Box
-                        key={e.id}
-                         width={e.width}
-                         height={e.height}
-                         quantity={e.quantity}
-                         id={e.id}
-                         color={e.color}
-                         changed={e.changed}/>
+                        left={box.x / 2.4}
+                        top={box.y / 2.4}
+                        key={box.id}
+                        width={box.width}
+                        height={box.height}
+                        id={box.id}
+                        color={box.color}
+                        extraFields={box.extraFields}
+                    />
                 ))}
+                 <BoxDimensions fontSize='24px' isHeight={false} top='-40px' right='50%' dimensions={width}/>
+                 <BoxDimensions fontSize='24px' isHeight={true} bottom='50%' left='-50px' dimensions={height}/>
             </div>
         </div>
   )
