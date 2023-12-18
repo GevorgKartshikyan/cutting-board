@@ -13,15 +13,42 @@ const Board: FC = () => {
   const boards = packBoxes(width, height, duplicateBoxes(boardList))
   return (
         <div className='board-container'>
-            <div style={{
-              position: 'relative',
-              width: width / 2.4,
-              height: height / 2.4,
-              border: '1px solid black',
-              background: boardColor,
-              marginBottom: 50
-            }}>
-                {boards.map((box) => (
+            {/* eslint-disable-next-line multiline-ternary */}
+            {boards.unplacedBoxes.length > 0 ? (Object.keys(boards).map((key) => (
+                    <div key={key} style={{
+                      position: 'relative',
+                      width: width / 2.4,
+                      height: height / 2.4,
+                      border: '1px solid black',
+                      background: boardColor,
+                      marginBottom: 50
+                    }}>
+                        {/* @ts-expect-error */}
+                        {boards[key].map((box) => (
+                            <Box
+                                left={box.x / 2.4}
+                                top={box.y / 2.4}
+                                key={box.id}
+                                width={box.width}
+                                height={box.height}
+                                id={box.id}
+                                color={box.color}
+                                extraFields={box.extraFields}
+                            />
+                        ))}
+                        <BoxDimensions fontSize='24px' isHeight={false} top='-40px' right='50%' dimensions={width}/>
+                        <BoxDimensions fontSize='24px' isHeight={true} bottom='50%' left='-50px' dimensions={height}/>
+                    </div>
+            ))) : (
+                <div style={{
+                  position: 'relative',
+                  width: width / 2.4,
+                  height: height / 2.4,
+                  border: '1px solid black',
+                  background: boardColor,
+                  marginBottom: 50
+                }}>
+                {boards.placedBoxes.map((box) => (
                     <Box
                         left={box.x / 2.4}
                         top={box.y / 2.4}
@@ -33,9 +60,9 @@ const Board: FC = () => {
                         extraFields={box.extraFields}
                     />
                 ))}
-                 <BoxDimensions fontSize='24px' isHeight={false} top='-40px' right='50%' dimensions={width}/>
-                 <BoxDimensions fontSize='24px' isHeight={true} bottom='50%' left='-50px' dimensions={height}/>
-            </div>
+                <BoxDimensions fontSize='24px' isHeight={false} top='-40px' right='50%' dimensions={width}/>
+                <BoxDimensions fontSize='24px' isHeight={true} bottom='50%' left='-50px' dimensions={height}/>
+            </div>)}
         </div>
   )
 }

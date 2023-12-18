@@ -93,6 +93,8 @@ input[type=number] {
   display: flex;
   justify-content: center;
   margin-top: 40mm;
+  flex-direction: column;
+  align-items: center;
   position: relative;
 }
 
@@ -246,8 +248,6 @@ input[type=number] {
       transition:  all 0.4s;
       &.selected {
         transform: scale(1.8);
-      }
-      &:hover {
       }
     }
 

@@ -5,15 +5,16 @@ function packBoxes (bigBoxWidth, bigBoxHeight, smallBoxes) {
   const sortedBoxes = [...smallBoxes].sort((a, b) => b.width * b.height - a.width * a.height)
 
   const placedBoxes = []
+  const unplacedBoxes = []
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   function canPlaceBox (x, y, width, height) {
     for (const placedBox of placedBoxes) {
       if (
         x < placedBox.x + placedBox.width &&
-                x + width > placedBox.x &&
-                y < placedBox.y + placedBox.height &&
-                y + height > placedBox.y
+          x + width > placedBox.x &&
+          y < placedBox.y + placedBox.height &&
+          y + height > placedBox.y
       ) {
         return false
       }
@@ -34,23 +35,34 @@ function packBoxes (bigBoxWidth, bigBoxHeight, smallBoxes) {
             height: smallBox.height,
             color: smallBox.color,
             id: uuidV4(),
-            extraFields: (smallBox.extraFields) !== undefined
-              ? smallBox.extraFields
-              : {
-                  borderTopLeftRadius: '0',
-                  borderTopRightRadius: '0',
-                  borderBottomLeftRadius: '0',
-                  borderBottomRightRadius: '0'
-                }
+            extraFields:
+                smallBox.extraFields !== undefined
+                  ? smallBox.extraFields
+                  : {
+                      borderTopLeftRadius: '0',
+                      borderTopRightRadius: '0',
+                      borderBottomLeftRadius: '0',
+                      borderBottomRightRadius: '0'
+                    }
           })
           placed = true
           break
         }
       }
-      if (placed) break
+      if (placed) {
+        break
+      }
+    }
+
+    if (!placed) {
+      unplacedBoxes.push(smallBox)
     }
   }
-  return placedBoxes
+
+  return {
+    placedBoxes,
+    unplacedBoxes
+  }
 }
 
 export default packBoxes
