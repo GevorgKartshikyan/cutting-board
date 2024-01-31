@@ -1,2 +1,2 @@
-export const width: number = 1830
-export const height: number = 3630
+export const width: number = 2070
+export const height: number = 2800

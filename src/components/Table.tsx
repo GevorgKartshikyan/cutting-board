@@ -9,7 +9,6 @@ import BoardFieldsModal from './BoardFieldsModal'
 import { useTranslation } from 'react-i18next'
 const Table: FC = () => {
   const { t } = useTranslation()
-
   const dispatch = useDispatch()
   const [boardId, setBoardId] = useState('')
   const [showModal, setShowModal] = useState(false)

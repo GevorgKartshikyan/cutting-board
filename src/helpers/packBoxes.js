@@ -2,7 +2,7 @@ import { v4 as uuidV4 } from 'uuid'
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function packBoxes (bigBoxWidth, bigBoxHeight, smallBoxes) {
-  const sortedBoxes = [...smallBoxes].sort((a, b) => b.width * b.height - a.width * a.height)
+  // const sortedBoxes = [...smallBoxes].sort((a, b) => b.width * b.height - a.width * a.height)
 
   const placedBoxes = []
   const unplacedBoxes = []
@@ -22,7 +22,7 @@ function packBoxes (bigBoxWidth, bigBoxHeight, smallBoxes) {
     return true
   }
 
-  for (const smallBox of sortedBoxes) {
+  for (const smallBox of smallBoxes) {
     let placed = false
 
     for (let y = 0; y <= bigBoxHeight - smallBox.height; y++) {

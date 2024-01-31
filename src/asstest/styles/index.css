@@ -103,7 +103,7 @@ input[type=number] {
   transition: all 0.4s;
 }
 .select-board .select-board-block .small-board:hover {
-  transform: scale(1.5);
+  transform: scale(1.2);
 }
 .select-board .select-board-block .small-board.selected {
   border: 5px solid rgba(4, 74, 180, 0.5);
