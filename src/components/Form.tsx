@@ -8,10 +8,11 @@ import { boardListsAdd } from '../store/actions/board'
 import { useTranslation } from 'react-i18next'
 
 const generateRandomColor = (): string => {
-  const letters = '0123456789ABCDEF'
-  let color = '#'
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)]
+  const letters: '0123456789ABCDEF' = '0123456789ABCDEF'
+  const hexCodeFormat: number = 6
+  let color: string = '#'
+  for (let i: number = 0; i < hexCodeFormat; i++) {
+    color += letters[Math.floor(Math.random() * letters.length)]
   }
   return color
 }

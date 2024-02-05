@@ -4,7 +4,7 @@ import Table from './components/Table'
 import Board from './components/Board'
 import Top from './components/Top'
 import i18n from 'i18next'
-
+import GoTop from './components/GoTop'
 const App: FC = () => {
   useEffect(() => {
     // @ts-expect-error
@@ -16,6 +16,7 @@ const App: FC = () => {
             <Form/>
             <Table/>
             <Board/>
+            <GoTop/>
         </>
   )
 }

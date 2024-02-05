@@ -3,7 +3,8 @@ import { type BoxProps } from '../helpers/types'
 import BoxDimensions from './BoxDimensions'
 
 const Box: FC<BoxProps> = ({ width, height, color, extraFields, left, top }: BoxProps) => {
-  return <>
+  return (
+        <>
             <div
                 style={{
                   left,
@@ -11,7 +12,7 @@ const Box: FC<BoxProps> = ({ width, height, color, extraFields, left, top }: Box
                   width: `${(+width / 2.4)}px`,
                   height: `${(+height / 2.4) - 1}px`,
                   backgroundColor: color,
-                  border: '1px solid #FFFFFFA5',
+                  border: '0.1px solid #FFFFFFA5',
                   opacity: 0.6,
                   position: 'absolute',
                   ...extraFields
@@ -21,6 +22,7 @@ const Box: FC<BoxProps> = ({ width, height, color, extraFields, left, top }: Box
               <BoxDimensions fontSize='14px' isHeight={true} bottom='5px' left='0px' dimensions={height}/>
             </div>
     </>
+  )
 }
 
 export default Box

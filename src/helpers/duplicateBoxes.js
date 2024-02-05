@@ -1,5 +1,4 @@
 import { v4 as uuidV4 } from 'uuid'
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function duplicateBoxes (originalBoxes) {
   const duplicatedBoxes = []
   for (const box of originalBoxes) {
@@ -10,5 +9,4 @@ function duplicateBoxes (originalBoxes) {
   }
   return duplicatedBoxes
 }
-
 export default duplicateBoxes

@@ -10,7 +10,7 @@ const BoxDimensions: FC<BoxDimensionsProps> = ({ dimensions, top, right, bottom,
           position: 'absolute',
           bottom,
           left,
-          transform: isHeight === true ? 'rotate(90deg)' : 'rotate(0deg)',
+          transform: isHeight ? 'rotate(90deg)' : 'rotate(0deg)',
           zIndex: 0,
           fontSize
         }}>
